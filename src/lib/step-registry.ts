@@ -91,7 +91,7 @@ export const PLUGIN_STEP_IMPORTERS: Record<string, StepImporter> = {
     importer: () => import("@/plugins/firecrawl/steps/scrape"),
     stepFunction: "firecrawlScrapeStep",
   },
-  Scrape: {
+  "Scrape": {
     importer: () => import("@/plugins/firecrawl/steps/scrape"),
     stepFunction: "firecrawlScrapeStep",
   },
@@ -99,7 +99,7 @@ export const PLUGIN_STEP_IMPORTERS: Record<string, StepImporter> = {
     importer: () => import("@/plugins/firecrawl/steps/search"),
     stepFunction: "firecrawlSearchStep",
   },
-  Search: {
+  "Search": {
     importer: () => import("@/plugins/firecrawl/steps/search"),
     stepFunction: "firecrawlSearchStep",
   },
@@ -254,8 +254,8 @@ export const ACTION_LABELS: Record<string, string> = {
   "webflow/list-sites": "List Sites",
   "webflow/get-site": "Get Site",
   "webflow/publish-site": "Publish Site",
-  Scrape: "Scrape URL",
-  Search: "Search Web",
+  "Scrape": "Scrape URL",
+  "Search": "Search Web",
   "Generate Text": "Generate Text",
   "Generate Image": "Generate Image",
   "Send Email": "Send Email",

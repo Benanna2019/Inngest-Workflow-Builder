@@ -33,8 +33,6 @@ export const OUTPUT_DISPLAY_CONFIGS: Record<string, OutputDisplayConfig> = {
 /**
  * Get the output display config for an action type
  */
-export function getOutputDisplayConfig(
-  actionType: string
-): OutputDisplayConfig | undefined {
+export function getOutputDisplayConfig(actionType: string): OutputDisplayConfig | undefined {
   return OUTPUT_DISPLAY_CONFIGS[actionType];
 }
