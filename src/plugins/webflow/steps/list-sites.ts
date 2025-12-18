@@ -1,5 +1,3 @@
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import { getErrorMessage } from "@/lib/utils";
@@ -106,8 +104,6 @@ async function stepHandler(
 export async function listSitesStep(
   input: ListSitesInput
 ): Promise<ListSitesResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

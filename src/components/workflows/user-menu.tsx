@@ -1,7 +1,6 @@
 "use client";
 
 import { Key, LogOut, Moon, Plug, Settings, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import {
   AuthDialog,
@@ -17,8 +16,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
+  // DropdownMenuRadioGroup,
+  // DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
@@ -30,7 +29,6 @@ import { signOut, useSession } from "@/lib/auth-client";
 
 export const UserMenu = () => {
   const { data: session, isPending } = useSession();
-  const { theme, setTheme } = useTheme();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [integrationsOpen, setIntegrationsOpen] = useState(false);
   const [apiKeysOpen, setApiKeysOpen] = useState(false);
@@ -154,13 +152,13 @@ export const UserMenu = () => {
             <span>Theme</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup onValueChange={setTheme} value={theme}>
+            {/* <DropdownMenuRadioGroup onValueChange={setTheme} value={theme}>
               <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="system">
                 System
               </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
+            </DropdownMenuRadioGroup> */}
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />

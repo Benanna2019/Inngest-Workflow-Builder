@@ -8,8 +8,6 @@ export default `export async function httpRequestStep(input: {
   httpHeaders?: string;
   httpBody?: string;
 }) {
-  "use step";
-  
   let headers = {};
   if (input.httpHeaders) {
     try {

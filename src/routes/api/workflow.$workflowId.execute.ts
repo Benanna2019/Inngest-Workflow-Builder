@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { eq } from "drizzle-orm";
-import { start } from "workflow/api";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { validateWorkflowIntegrations } from "@/lib/db/integrations";
 import { workflowExecutions, workflows } from "@/lib/db/schema";
-import { executeWorkflow } from "@/lib/workflow-executor.workflow";
+import { inngest } from "@/lib/inngest/client";
 import type { WorkflowEdge, WorkflowNode } from "@/lib/workflow-store";
 
 export const Route = createFileRoute("/api/workflow/$workflowId/execute")({
@@ -26,31 +25,30 @@ async function executeWorkflowBackground(
 ) {
   try {
     console.log("[Workflow Execute] Starting execution:", executionId);
-
-    // SECURITY: We pass only the workflowId as a reference
-    // Steps will fetch credentials internally using fetchWorkflowCredentials(workflowId)
-    // This prevents credentials from being logged in Vercel's observability
-    console.log("[Workflow Execute] Calling executeWorkflow with:", {
+    console.log("[Workflow Execute] Sending to Inngest with:", {
       nodeCount: nodes.length,
       edgeCount: edges.length,
       hasExecutionId: !!executionId,
       workflowId,
     });
 
-    // Use start() from workflow/api to properly execute the workflow
-    start(executeWorkflow, [
-      {
+    // Send event to Inngest to execute the workflow
+    // SECURITY: We pass only the workflowId as a reference
+    // Steps will fetch credentials internally using fetchCredentials(integrationId)
+    await inngest.send({
+      name: "workflow/execute",
+      data: {
         nodes,
         edges,
         triggerInput: input,
         executionId,
-        workflowId, // Pass workflow ID so steps can fetch credentials
+        workflowId,
       },
-    ]);
+    });
 
-    console.log("[Workflow Execute] Workflow started successfully");
+    console.log("[Workflow Execute] Workflow event sent to Inngest");
   } catch (error) {
-    console.error("[Workflow Execute] Error during execution:", error);
+    console.error("[Workflow Execute] Error sending to Inngest:", error);
     console.error(
       "[Workflow Execute] Error stack:",
       error instanceof Error ? error.stack : "N/A"

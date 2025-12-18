@@ -13,7 +13,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { input } from "@inquirer/prompts";
 
-const PLUGINS_DIR = join(process.cwd(), "plugins");
+const PLUGINS_DIR = join(process.cwd(), "src/plugins");
 const TEMPLATE_DIR = join(PLUGINS_DIR, "_template");
 
 // Regex patterns used for case conversions (hoisted for performance)

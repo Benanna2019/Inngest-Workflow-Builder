@@ -13,8 +13,6 @@
  * 3. The step function must be exported and match the name in index.ts
  */
 
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import { getErrorMessage } from "@/lib/utils";
@@ -93,8 +91,6 @@ async function stepHandler(
 export async function [actionName]Step(
   input: [ActionName]Input
 ): Promise<[ActionName]Result> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

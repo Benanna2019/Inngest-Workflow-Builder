@@ -8,650 +8,644 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './app/__root'
-import { Route as IndexRouteImport } from './app/index'
-import { Route as WorkflowsIndexRouteImport } from './app/workflows/index'
-import { Route as ApiWorkflowsRouteImport } from './app/api/workflows'
-import { Route as ApiUserRouteImport } from './app/api/user'
-import { Route as ApiIntegrationsRouteImport } from './app/api/integrations'
-import { Route as ApiApiKeysRouteImport } from './app/api/api-keys'
-import { Route as WorkflowsWorkflowIdRouteRouteImport } from './app/workflows/$workflowId/route'
-import { Route as WorkflowsWorkflowIdIndexRouteImport } from './app/workflows/$workflowId/index'
-import { Route as ApiWorkflowsCurrentRouteImport } from './app/api/workflows.current'
-import { Route as ApiWorkflowsCreateRouteImport } from './app/api/workflows.create'
-import { Route as ApiWorkflowsWorkflowIdRouteImport } from './app/api/workflows.$workflowId'
-import { Route as ApiIntegrationsIntegrationIdRouteImport } from './app/api/integrations.$integrationId'
-import { Route as ApiAuthSplatRouteImport } from './app/api/auth.$'
-import { Route as ApiApiKeysKeyIdRouteImport } from './app/api/api-keys.$keyId'
-import { Route as ApiAiGenerateRouteImport } from './app/api/ai/generate'
-import { Route as ApiWorkflowsWorkflowIdWebhookRouteImport } from './app/api/workflows.$workflowId.webhook'
-import { Route as ApiWorkflowsWorkflowIdExecutionsRouteImport } from './app/api/workflows.$workflowId.executions'
-import { Route as ApiWorkflowsWorkflowIdDuplicateRouteImport } from './app/api/workflows.$workflowId.duplicate'
-import { Route as ApiWorkflowsWorkflowIdDownloadRouteImport } from './app/api/workflows.$workflowId.download'
-import { Route as ApiWorkflowsWorkflowIdCodeRouteImport } from './app/api/workflows.$workflowId.code'
-import { Route as ApiWorkflowWorkflowIdExecuteRouteImport } from './app/api/workflow.$workflowId.execute'
-import { Route as ApiOgWorkflowWorkflowIdRouteImport } from './app/api/og/workflow/$workflowId'
-import { Route as ApiIntegrationsIntegrationIdTestIntegrationRouteImport } from './app/api/integrations.$integrationId.testIntegration'
-import { Route as ApiWorkflowsExecutionsExecutionIdStatusRouteImport } from './app/api/workflows.executions.$executionId.status'
-import { Route as ApiWorkflowsExecutionsExecutionIdLogsRouteImport } from './app/api/workflows.executions.$executionId.logs'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as ApiAiGenerateRouteImport } from "./routes/api/ai/generate";
+import { Route as ApiApiKeysRouteImport } from "./routes/api/api-keys";
+import { Route as ApiApiKeysKeyIdRouteImport } from "./routes/api/api-keys.$keyId";
+import { Route as ApiAuthSplatRouteImport } from "./routes/api/auth.$";
+import { Route as ApiInngestRouteImport } from "./routes/api/inngest";
+import { Route as ApiIntegrationsRouteImport } from "./routes/api/integrations";
+import { Route as ApiIntegrationsIntegrationIdRouteImport } from "./routes/api/integrations.$integrationId";
+import { Route as ApiIntegrationsIntegrationIdTestIntegrationRouteImport } from "./routes/api/integrations.$integrationId.testIntegration";
+import { Route as ApiOgWorkflowWorkflowIdRouteImport } from "./routes/api/og/workflow/$workflowId";
+import { Route as ApiUserRouteImport } from "./routes/api/user";
+import { Route as ApiWorkflowWorkflowIdExecuteRouteImport } from "./routes/api/workflow.$workflowId.execute";
+import { Route as ApiWorkflowsRouteImport } from "./routes/api/workflows";
+import { Route as ApiWorkflowsWorkflowIdRouteImport } from "./routes/api/workflows.$workflowId";
+import { Route as ApiWorkflowsWorkflowIdCodeRouteImport } from "./routes/api/workflows.$workflowId.code";
+import { Route as ApiWorkflowsWorkflowIdDownloadRouteImport } from "./routes/api/workflows.$workflowId.download";
+import { Route as ApiWorkflowsWorkflowIdDuplicateRouteImport } from "./routes/api/workflows.$workflowId.duplicate";
+import { Route as ApiWorkflowsWorkflowIdExecutionsRouteImport } from "./routes/api/workflows.$workflowId.executions";
+import { Route as ApiWorkflowsWorkflowIdWebhookRouteImport } from "./routes/api/workflows.$workflowId.webhook";
+import { Route as ApiWorkflowsCreateRouteImport } from "./routes/api/workflows.create";
+import { Route as ApiWorkflowsCurrentRouteImport } from "./routes/api/workflows.current";
+import { Route as ApiWorkflowsExecutionsExecutionIdLogsRouteImport } from "./routes/api/workflows.executions.$executionId.logs";
+import { Route as ApiWorkflowsExecutionsExecutionIdStatusRouteImport } from "./routes/api/workflows.executions.$executionId.status";
+import { Route as IndexRouteImport } from "./routes/index";
+import { Route as WorkflowsRouteImport } from "./routes/workflows";
+import { Route as WorkflowsWorkflowIdRouteImport } from "./routes/workflows.$workflowId";
 
+const WorkflowsRoute = WorkflowsRouteImport.update({
+  id: "/workflows",
+  path: "/workflows",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
-} as any)
-const WorkflowsIndexRoute = WorkflowsIndexRouteImport.update({
-  id: '/workflows/',
-  path: '/workflows/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
+const WorkflowsWorkflowIdRoute = WorkflowsWorkflowIdRouteImport.update({
+  id: "/$workflowId",
+  path: "/$workflowId",
+  getParentRoute: () => WorkflowsRoute,
+} as any);
 const ApiWorkflowsRoute = ApiWorkflowsRouteImport.update({
-  id: '/api/workflows',
-  path: '/api/workflows',
+  id: "/api/workflows",
+  path: "/api/workflows",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ApiUserRoute = ApiUserRouteImport.update({
-  id: '/api/user',
-  path: '/api/user',
+  id: "/api/user",
+  path: "/api/user",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ApiIntegrationsRoute = ApiIntegrationsRouteImport.update({
-  id: '/api/integrations',
-  path: '/api/integrations',
+  id: "/api/integrations",
+  path: "/api/integrations",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
+const ApiInngestRoute = ApiInngestRouteImport.update({
+  id: "/api/inngest",
+  path: "/api/inngest",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const ApiApiKeysRoute = ApiApiKeysRouteImport.update({
-  id: '/api/api-keys',
-  path: '/api/api-keys',
+  id: "/api/api-keys",
+  path: "/api/api-keys",
   getParentRoute: () => rootRouteImport,
-} as any)
-const WorkflowsWorkflowIdRouteRoute =
-  WorkflowsWorkflowIdRouteRouteImport.update({
-    id: '/workflows/$workflowId',
-    path: '/workflows/$workflowId',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const WorkflowsWorkflowIdIndexRoute =
-  WorkflowsWorkflowIdIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => WorkflowsWorkflowIdRouteRoute,
-  } as any)
+} as any);
 const ApiWorkflowsCurrentRoute = ApiWorkflowsCurrentRouteImport.update({
-  id: '/current',
-  path: '/current',
+  id: "/current",
+  path: "/current",
   getParentRoute: () => ApiWorkflowsRoute,
-} as any)
+} as any);
 const ApiWorkflowsCreateRoute = ApiWorkflowsCreateRouteImport.update({
-  id: '/create',
-  path: '/create',
+  id: "/create",
+  path: "/create",
   getParentRoute: () => ApiWorkflowsRoute,
-} as any)
+} as any);
 const ApiWorkflowsWorkflowIdRoute = ApiWorkflowsWorkflowIdRouteImport.update({
-  id: '/$workflowId',
-  path: '/$workflowId',
+  id: "/$workflowId",
+  path: "/$workflowId",
   getParentRoute: () => ApiWorkflowsRoute,
-} as any)
+} as any);
 const ApiIntegrationsIntegrationIdRoute =
   ApiIntegrationsIntegrationIdRouteImport.update({
-    id: '/$integrationId',
-    path: '/$integrationId',
+    id: "/$integrationId",
+    path: "/$integrationId",
     getParentRoute: () => ApiIntegrationsRoute,
-  } as any)
+  } as any);
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
+  id: "/api/auth/$",
+  path: "/api/auth/$",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ApiApiKeysKeyIdRoute = ApiApiKeysKeyIdRouteImport.update({
-  id: '/$keyId',
-  path: '/$keyId',
+  id: "/$keyId",
+  path: "/$keyId",
   getParentRoute: () => ApiApiKeysRoute,
-} as any)
+} as any);
 const ApiAiGenerateRoute = ApiAiGenerateRouteImport.update({
-  id: '/api/ai/generate',
-  path: '/api/ai/generate',
+  id: "/api/ai/generate",
+  path: "/api/ai/generate",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ApiWorkflowsWorkflowIdWebhookRoute =
   ApiWorkflowsWorkflowIdWebhookRouteImport.update({
-    id: '/webhook',
-    path: '/webhook',
+    id: "/webhook",
+    path: "/webhook",
     getParentRoute: () => ApiWorkflowsWorkflowIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsWorkflowIdExecutionsRoute =
   ApiWorkflowsWorkflowIdExecutionsRouteImport.update({
-    id: '/executions',
-    path: '/executions',
+    id: "/executions",
+    path: "/executions",
     getParentRoute: () => ApiWorkflowsWorkflowIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsWorkflowIdDuplicateRoute =
   ApiWorkflowsWorkflowIdDuplicateRouteImport.update({
-    id: '/duplicate',
-    path: '/duplicate',
+    id: "/duplicate",
+    path: "/duplicate",
     getParentRoute: () => ApiWorkflowsWorkflowIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsWorkflowIdDownloadRoute =
   ApiWorkflowsWorkflowIdDownloadRouteImport.update({
-    id: '/download',
-    path: '/download',
+    id: "/download",
+    path: "/download",
     getParentRoute: () => ApiWorkflowsWorkflowIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsWorkflowIdCodeRoute =
   ApiWorkflowsWorkflowIdCodeRouteImport.update({
-    id: '/code',
-    path: '/code',
+    id: "/code",
+    path: "/code",
     getParentRoute: () => ApiWorkflowsWorkflowIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowWorkflowIdExecuteRoute =
   ApiWorkflowWorkflowIdExecuteRouteImport.update({
-    id: '/api/workflow/$workflowId/execute',
-    path: '/api/workflow/$workflowId/execute',
+    id: "/api/workflow/$workflowId/execute",
+    path: "/api/workflow/$workflowId/execute",
     getParentRoute: () => rootRouteImport,
-  } as any)
+  } as any);
 const ApiOgWorkflowWorkflowIdRoute = ApiOgWorkflowWorkflowIdRouteImport.update({
-  id: '/api/og/workflow/$workflowId',
-  path: '/api/og/workflow/$workflowId',
+  id: "/api/og/workflow/$workflowId",
+  path: "/api/og/workflow/$workflowId",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ApiIntegrationsIntegrationIdTestIntegrationRoute =
   ApiIntegrationsIntegrationIdTestIntegrationRouteImport.update({
-    id: '/testIntegration',
-    path: '/testIntegration',
+    id: "/testIntegration",
+    path: "/testIntegration",
     getParentRoute: () => ApiIntegrationsIntegrationIdRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsExecutionsExecutionIdStatusRoute =
   ApiWorkflowsExecutionsExecutionIdStatusRouteImport.update({
-    id: '/executions/$executionId/status',
-    path: '/executions/$executionId/status',
+    id: "/executions/$executionId/status",
+    path: "/executions/$executionId/status",
     getParentRoute: () => ApiWorkflowsRoute,
-  } as any)
+  } as any);
 const ApiWorkflowsExecutionsExecutionIdLogsRoute =
   ApiWorkflowsExecutionsExecutionIdLogsRouteImport.update({
-    id: '/executions/$executionId/logs',
-    path: '/executions/$executionId/logs',
+    id: "/executions/$executionId/logs",
+    path: "/executions/$executionId/logs",
     getParentRoute: () => ApiWorkflowsRoute,
-  } as any)
+  } as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/workflows/$workflowId': typeof WorkflowsWorkflowIdRouteRouteWithChildren
-  '/api/api-keys': typeof ApiApiKeysRouteWithChildren
-  '/api/integrations': typeof ApiIntegrationsRouteWithChildren
-  '/api/user': typeof ApiUserRoute
-  '/api/workflows': typeof ApiWorkflowsRouteWithChildren
-  '/workflows': typeof WorkflowsIndexRoute
-  '/api/ai/generate': typeof ApiAiGenerateRoute
-  '/api/api-keys/$keyId': typeof ApiApiKeysKeyIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/integrations/$integrationId': typeof ApiIntegrationsIntegrationIdRouteWithChildren
-  '/api/workflows/$workflowId': typeof ApiWorkflowsWorkflowIdRouteWithChildren
-  '/api/workflows/create': typeof ApiWorkflowsCreateRoute
-  '/api/workflows/current': typeof ApiWorkflowsCurrentRoute
-  '/workflows/$workflowId/': typeof WorkflowsWorkflowIdIndexRoute
-  '/api/integrations/$integrationId/testIntegration': typeof ApiIntegrationsIntegrationIdTestIntegrationRoute
-  '/api/og/workflow/$workflowId': typeof ApiOgWorkflowWorkflowIdRoute
-  '/api/workflow/$workflowId/execute': typeof ApiWorkflowWorkflowIdExecuteRoute
-  '/api/workflows/$workflowId/code': typeof ApiWorkflowsWorkflowIdCodeRoute
-  '/api/workflows/$workflowId/download': typeof ApiWorkflowsWorkflowIdDownloadRoute
-  '/api/workflows/$workflowId/duplicate': typeof ApiWorkflowsWorkflowIdDuplicateRoute
-  '/api/workflows/$workflowId/executions': typeof ApiWorkflowsWorkflowIdExecutionsRoute
-  '/api/workflows/$workflowId/webhook': typeof ApiWorkflowsWorkflowIdWebhookRoute
-  '/api/workflows/executions/$executionId/logs': typeof ApiWorkflowsExecutionsExecutionIdLogsRoute
-  '/api/workflows/executions/$executionId/status': typeof ApiWorkflowsExecutionsExecutionIdStatusRoute
+  "/": typeof IndexRoute;
+  "/workflows": typeof WorkflowsRouteWithChildren;
+  "/api/api-keys": typeof ApiApiKeysRouteWithChildren;
+  "/api/inngest": typeof ApiInngestRoute;
+  "/api/integrations": typeof ApiIntegrationsRouteWithChildren;
+  "/api/user": typeof ApiUserRoute;
+  "/api/workflows": typeof ApiWorkflowsRouteWithChildren;
+  "/workflows/$workflowId": typeof WorkflowsWorkflowIdRoute;
+  "/api/ai/generate": typeof ApiAiGenerateRoute;
+  "/api/api-keys/$keyId": typeof ApiApiKeysKeyIdRoute;
+  "/api/auth/$": typeof ApiAuthSplatRoute;
+  "/api/integrations/$integrationId": typeof ApiIntegrationsIntegrationIdRouteWithChildren;
+  "/api/workflows/$workflowId": typeof ApiWorkflowsWorkflowIdRouteWithChildren;
+  "/api/workflows/create": typeof ApiWorkflowsCreateRoute;
+  "/api/workflows/current": typeof ApiWorkflowsCurrentRoute;
+  "/api/integrations/$integrationId/testIntegration": typeof ApiIntegrationsIntegrationIdTestIntegrationRoute;
+  "/api/og/workflow/$workflowId": typeof ApiOgWorkflowWorkflowIdRoute;
+  "/api/workflow/$workflowId/execute": typeof ApiWorkflowWorkflowIdExecuteRoute;
+  "/api/workflows/$workflowId/code": typeof ApiWorkflowsWorkflowIdCodeRoute;
+  "/api/workflows/$workflowId/download": typeof ApiWorkflowsWorkflowIdDownloadRoute;
+  "/api/workflows/$workflowId/duplicate": typeof ApiWorkflowsWorkflowIdDuplicateRoute;
+  "/api/workflows/$workflowId/executions": typeof ApiWorkflowsWorkflowIdExecutionsRoute;
+  "/api/workflows/$workflowId/webhook": typeof ApiWorkflowsWorkflowIdWebhookRoute;
+  "/api/workflows/executions/$executionId/logs": typeof ApiWorkflowsExecutionsExecutionIdLogsRoute;
+  "/api/workflows/executions/$executionId/status": typeof ApiWorkflowsExecutionsExecutionIdStatusRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/api/api-keys': typeof ApiApiKeysRouteWithChildren
-  '/api/integrations': typeof ApiIntegrationsRouteWithChildren
-  '/api/user': typeof ApiUserRoute
-  '/api/workflows': typeof ApiWorkflowsRouteWithChildren
-  '/workflows': typeof WorkflowsIndexRoute
-  '/api/ai/generate': typeof ApiAiGenerateRoute
-  '/api/api-keys/$keyId': typeof ApiApiKeysKeyIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/integrations/$integrationId': typeof ApiIntegrationsIntegrationIdRouteWithChildren
-  '/api/workflows/$workflowId': typeof ApiWorkflowsWorkflowIdRouteWithChildren
-  '/api/workflows/create': typeof ApiWorkflowsCreateRoute
-  '/api/workflows/current': typeof ApiWorkflowsCurrentRoute
-  '/workflows/$workflowId': typeof WorkflowsWorkflowIdIndexRoute
-  '/api/integrations/$integrationId/testIntegration': typeof ApiIntegrationsIntegrationIdTestIntegrationRoute
-  '/api/og/workflow/$workflowId': typeof ApiOgWorkflowWorkflowIdRoute
-  '/api/workflow/$workflowId/execute': typeof ApiWorkflowWorkflowIdExecuteRoute
-  '/api/workflows/$workflowId/code': typeof ApiWorkflowsWorkflowIdCodeRoute
-  '/api/workflows/$workflowId/download': typeof ApiWorkflowsWorkflowIdDownloadRoute
-  '/api/workflows/$workflowId/duplicate': typeof ApiWorkflowsWorkflowIdDuplicateRoute
-  '/api/workflows/$workflowId/executions': typeof ApiWorkflowsWorkflowIdExecutionsRoute
-  '/api/workflows/$workflowId/webhook': typeof ApiWorkflowsWorkflowIdWebhookRoute
-  '/api/workflows/executions/$executionId/logs': typeof ApiWorkflowsExecutionsExecutionIdLogsRoute
-  '/api/workflows/executions/$executionId/status': typeof ApiWorkflowsExecutionsExecutionIdStatusRoute
+  "/": typeof IndexRoute;
+  "/workflows": typeof WorkflowsRouteWithChildren;
+  "/api/api-keys": typeof ApiApiKeysRouteWithChildren;
+  "/api/inngest": typeof ApiInngestRoute;
+  "/api/integrations": typeof ApiIntegrationsRouteWithChildren;
+  "/api/user": typeof ApiUserRoute;
+  "/api/workflows": typeof ApiWorkflowsRouteWithChildren;
+  "/workflows/$workflowId": typeof WorkflowsWorkflowIdRoute;
+  "/api/ai/generate": typeof ApiAiGenerateRoute;
+  "/api/api-keys/$keyId": typeof ApiApiKeysKeyIdRoute;
+  "/api/auth/$": typeof ApiAuthSplatRoute;
+  "/api/integrations/$integrationId": typeof ApiIntegrationsIntegrationIdRouteWithChildren;
+  "/api/workflows/$workflowId": typeof ApiWorkflowsWorkflowIdRouteWithChildren;
+  "/api/workflows/create": typeof ApiWorkflowsCreateRoute;
+  "/api/workflows/current": typeof ApiWorkflowsCurrentRoute;
+  "/api/integrations/$integrationId/testIntegration": typeof ApiIntegrationsIntegrationIdTestIntegrationRoute;
+  "/api/og/workflow/$workflowId": typeof ApiOgWorkflowWorkflowIdRoute;
+  "/api/workflow/$workflowId/execute": typeof ApiWorkflowWorkflowIdExecuteRoute;
+  "/api/workflows/$workflowId/code": typeof ApiWorkflowsWorkflowIdCodeRoute;
+  "/api/workflows/$workflowId/download": typeof ApiWorkflowsWorkflowIdDownloadRoute;
+  "/api/workflows/$workflowId/duplicate": typeof ApiWorkflowsWorkflowIdDuplicateRoute;
+  "/api/workflows/$workflowId/executions": typeof ApiWorkflowsWorkflowIdExecutionsRoute;
+  "/api/workflows/$workflowId/webhook": typeof ApiWorkflowsWorkflowIdWebhookRoute;
+  "/api/workflows/executions/$executionId/logs": typeof ApiWorkflowsExecutionsExecutionIdLogsRoute;
+  "/api/workflows/executions/$executionId/status": typeof ApiWorkflowsExecutionsExecutionIdStatusRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/workflows/$workflowId': typeof WorkflowsWorkflowIdRouteRouteWithChildren
-  '/api/api-keys': typeof ApiApiKeysRouteWithChildren
-  '/api/integrations': typeof ApiIntegrationsRouteWithChildren
-  '/api/user': typeof ApiUserRoute
-  '/api/workflows': typeof ApiWorkflowsRouteWithChildren
-  '/workflows/': typeof WorkflowsIndexRoute
-  '/api/ai/generate': typeof ApiAiGenerateRoute
-  '/api/api-keys/$keyId': typeof ApiApiKeysKeyIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/integrations/$integrationId': typeof ApiIntegrationsIntegrationIdRouteWithChildren
-  '/api/workflows/$workflowId': typeof ApiWorkflowsWorkflowIdRouteWithChildren
-  '/api/workflows/create': typeof ApiWorkflowsCreateRoute
-  '/api/workflows/current': typeof ApiWorkflowsCurrentRoute
-  '/workflows/$workflowId/': typeof WorkflowsWorkflowIdIndexRoute
-  '/api/integrations/$integrationId/testIntegration': typeof ApiIntegrationsIntegrationIdTestIntegrationRoute
-  '/api/og/workflow/$workflowId': typeof ApiOgWorkflowWorkflowIdRoute
-  '/api/workflow/$workflowId/execute': typeof ApiWorkflowWorkflowIdExecuteRoute
-  '/api/workflows/$workflowId/code': typeof ApiWorkflowsWorkflowIdCodeRoute
-  '/api/workflows/$workflowId/download': typeof ApiWorkflowsWorkflowIdDownloadRoute
-  '/api/workflows/$workflowId/duplicate': typeof ApiWorkflowsWorkflowIdDuplicateRoute
-  '/api/workflows/$workflowId/executions': typeof ApiWorkflowsWorkflowIdExecutionsRoute
-  '/api/workflows/$workflowId/webhook': typeof ApiWorkflowsWorkflowIdWebhookRoute
-  '/api/workflows/executions/$executionId/logs': typeof ApiWorkflowsExecutionsExecutionIdLogsRoute
-  '/api/workflows/executions/$executionId/status': typeof ApiWorkflowsExecutionsExecutionIdStatusRoute
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/workflows": typeof WorkflowsRouteWithChildren;
+  "/api/api-keys": typeof ApiApiKeysRouteWithChildren;
+  "/api/inngest": typeof ApiInngestRoute;
+  "/api/integrations": typeof ApiIntegrationsRouteWithChildren;
+  "/api/user": typeof ApiUserRoute;
+  "/api/workflows": typeof ApiWorkflowsRouteWithChildren;
+  "/workflows/$workflowId": typeof WorkflowsWorkflowIdRoute;
+  "/api/ai/generate": typeof ApiAiGenerateRoute;
+  "/api/api-keys/$keyId": typeof ApiApiKeysKeyIdRoute;
+  "/api/auth/$": typeof ApiAuthSplatRoute;
+  "/api/integrations/$integrationId": typeof ApiIntegrationsIntegrationIdRouteWithChildren;
+  "/api/workflows/$workflowId": typeof ApiWorkflowsWorkflowIdRouteWithChildren;
+  "/api/workflows/create": typeof ApiWorkflowsCreateRoute;
+  "/api/workflows/current": typeof ApiWorkflowsCurrentRoute;
+  "/api/integrations/$integrationId/testIntegration": typeof ApiIntegrationsIntegrationIdTestIntegrationRoute;
+  "/api/og/workflow/$workflowId": typeof ApiOgWorkflowWorkflowIdRoute;
+  "/api/workflow/$workflowId/execute": typeof ApiWorkflowWorkflowIdExecuteRoute;
+  "/api/workflows/$workflowId/code": typeof ApiWorkflowsWorkflowIdCodeRoute;
+  "/api/workflows/$workflowId/download": typeof ApiWorkflowsWorkflowIdDownloadRoute;
+  "/api/workflows/$workflowId/duplicate": typeof ApiWorkflowsWorkflowIdDuplicateRoute;
+  "/api/workflows/$workflowId/executions": typeof ApiWorkflowsWorkflowIdExecutionsRoute;
+  "/api/workflows/$workflowId/webhook": typeof ApiWorkflowsWorkflowIdWebhookRoute;
+  "/api/workflows/executions/$executionId/logs": typeof ApiWorkflowsExecutionsExecutionIdLogsRoute;
+  "/api/workflows/executions/$executionId/status": typeof ApiWorkflowsExecutionsExecutionIdStatusRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/workflows/$workflowId'
-    | '/api/api-keys'
-    | '/api/integrations'
-    | '/api/user'
-    | '/api/workflows'
-    | '/workflows'
-    | '/api/ai/generate'
-    | '/api/api-keys/$keyId'
-    | '/api/auth/$'
-    | '/api/integrations/$integrationId'
-    | '/api/workflows/$workflowId'
-    | '/api/workflows/create'
-    | '/api/workflows/current'
-    | '/workflows/$workflowId/'
-    | '/api/integrations/$integrationId/testIntegration'
-    | '/api/og/workflow/$workflowId'
-    | '/api/workflow/$workflowId/execute'
-    | '/api/workflows/$workflowId/code'
-    | '/api/workflows/$workflowId/download'
-    | '/api/workflows/$workflowId/duplicate'
-    | '/api/workflows/$workflowId/executions'
-    | '/api/workflows/$workflowId/webhook'
-    | '/api/workflows/executions/$executionId/logs'
-    | '/api/workflows/executions/$executionId/status'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/workflows"
+    | "/api/api-keys"
+    | "/api/inngest"
+    | "/api/integrations"
+    | "/api/user"
+    | "/api/workflows"
+    | "/workflows/$workflowId"
+    | "/api/ai/generate"
+    | "/api/api-keys/$keyId"
+    | "/api/auth/$"
+    | "/api/integrations/$integrationId"
+    | "/api/workflows/$workflowId"
+    | "/api/workflows/create"
+    | "/api/workflows/current"
+    | "/api/integrations/$integrationId/testIntegration"
+    | "/api/og/workflow/$workflowId"
+    | "/api/workflow/$workflowId/execute"
+    | "/api/workflows/$workflowId/code"
+    | "/api/workflows/$workflowId/download"
+    | "/api/workflows/$workflowId/duplicate"
+    | "/api/workflows/$workflowId/executions"
+    | "/api/workflows/$workflowId/webhook"
+    | "/api/workflows/executions/$executionId/logs"
+    | "/api/workflows/executions/$executionId/status";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/api/api-keys'
-    | '/api/integrations'
-    | '/api/user'
-    | '/api/workflows'
-    | '/workflows'
-    | '/api/ai/generate'
-    | '/api/api-keys/$keyId'
-    | '/api/auth/$'
-    | '/api/integrations/$integrationId'
-    | '/api/workflows/$workflowId'
-    | '/api/workflows/create'
-    | '/api/workflows/current'
-    | '/workflows/$workflowId'
-    | '/api/integrations/$integrationId/testIntegration'
-    | '/api/og/workflow/$workflowId'
-    | '/api/workflow/$workflowId/execute'
-    | '/api/workflows/$workflowId/code'
-    | '/api/workflows/$workflowId/download'
-    | '/api/workflows/$workflowId/duplicate'
-    | '/api/workflows/$workflowId/executions'
-    | '/api/workflows/$workflowId/webhook'
-    | '/api/workflows/executions/$executionId/logs'
-    | '/api/workflows/executions/$executionId/status'
+    | "/"
+    | "/workflows"
+    | "/api/api-keys"
+    | "/api/inngest"
+    | "/api/integrations"
+    | "/api/user"
+    | "/api/workflows"
+    | "/workflows/$workflowId"
+    | "/api/ai/generate"
+    | "/api/api-keys/$keyId"
+    | "/api/auth/$"
+    | "/api/integrations/$integrationId"
+    | "/api/workflows/$workflowId"
+    | "/api/workflows/create"
+    | "/api/workflows/current"
+    | "/api/integrations/$integrationId/testIntegration"
+    | "/api/og/workflow/$workflowId"
+    | "/api/workflow/$workflowId/execute"
+    | "/api/workflows/$workflowId/code"
+    | "/api/workflows/$workflowId/download"
+    | "/api/workflows/$workflowId/duplicate"
+    | "/api/workflows/$workflowId/executions"
+    | "/api/workflows/$workflowId/webhook"
+    | "/api/workflows/executions/$executionId/logs"
+    | "/api/workflows/executions/$executionId/status";
   id:
-    | '__root__'
-    | '/'
-    | '/workflows/$workflowId'
-    | '/api/api-keys'
-    | '/api/integrations'
-    | '/api/user'
-    | '/api/workflows'
-    | '/workflows/'
-    | '/api/ai/generate'
-    | '/api/api-keys/$keyId'
-    | '/api/auth/$'
-    | '/api/integrations/$integrationId'
-    | '/api/workflows/$workflowId'
-    | '/api/workflows/create'
-    | '/api/workflows/current'
-    | '/workflows/$workflowId/'
-    | '/api/integrations/$integrationId/testIntegration'
-    | '/api/og/workflow/$workflowId'
-    | '/api/workflow/$workflowId/execute'
-    | '/api/workflows/$workflowId/code'
-    | '/api/workflows/$workflowId/download'
-    | '/api/workflows/$workflowId/duplicate'
-    | '/api/workflows/$workflowId/executions'
-    | '/api/workflows/$workflowId/webhook'
-    | '/api/workflows/executions/$executionId/logs'
-    | '/api/workflows/executions/$executionId/status'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/workflows"
+    | "/api/api-keys"
+    | "/api/inngest"
+    | "/api/integrations"
+    | "/api/user"
+    | "/api/workflows"
+    | "/workflows/$workflowId"
+    | "/api/ai/generate"
+    | "/api/api-keys/$keyId"
+    | "/api/auth/$"
+    | "/api/integrations/$integrationId"
+    | "/api/workflows/$workflowId"
+    | "/api/workflows/create"
+    | "/api/workflows/current"
+    | "/api/integrations/$integrationId/testIntegration"
+    | "/api/og/workflow/$workflowId"
+    | "/api/workflow/$workflowId/execute"
+    | "/api/workflows/$workflowId/code"
+    | "/api/workflows/$workflowId/download"
+    | "/api/workflows/$workflowId/duplicate"
+    | "/api/workflows/$workflowId/executions"
+    | "/api/workflows/$workflowId/webhook"
+    | "/api/workflows/executions/$executionId/logs"
+    | "/api/workflows/executions/$executionId/status";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  WorkflowsWorkflowIdRouteRoute: typeof WorkflowsWorkflowIdRouteRouteWithChildren
-  ApiApiKeysRoute: typeof ApiApiKeysRouteWithChildren
-  ApiIntegrationsRoute: typeof ApiIntegrationsRouteWithChildren
-  ApiUserRoute: typeof ApiUserRoute
-  ApiWorkflowsRoute: typeof ApiWorkflowsRouteWithChildren
-  WorkflowsIndexRoute: typeof WorkflowsIndexRoute
-  ApiAiGenerateRoute: typeof ApiAiGenerateRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiOgWorkflowWorkflowIdRoute: typeof ApiOgWorkflowWorkflowIdRoute
-  ApiWorkflowWorkflowIdExecuteRoute: typeof ApiWorkflowWorkflowIdExecuteRoute
+  IndexRoute: typeof IndexRoute;
+  WorkflowsRoute: typeof WorkflowsRouteWithChildren;
+  ApiApiKeysRoute: typeof ApiApiKeysRouteWithChildren;
+  ApiInngestRoute: typeof ApiInngestRoute;
+  ApiIntegrationsRoute: typeof ApiIntegrationsRouteWithChildren;
+  ApiUserRoute: typeof ApiUserRoute;
+  ApiWorkflowsRoute: typeof ApiWorkflowsRouteWithChildren;
+  ApiAiGenerateRoute: typeof ApiAiGenerateRoute;
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute;
+  ApiOgWorkflowWorkflowIdRoute: typeof ApiOgWorkflowWorkflowIdRoute;
+  ApiWorkflowWorkflowIdExecuteRoute: typeof ApiWorkflowWorkflowIdExecuteRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/workflows/': {
-      id: '/workflows/'
-      path: '/workflows'
-      fullPath: '/workflows'
-      preLoaderRoute: typeof WorkflowsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/workflows': {
-      id: '/api/workflows'
-      path: '/api/workflows'
-      fullPath: '/api/workflows'
-      preLoaderRoute: typeof ApiWorkflowsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/user': {
-      id: '/api/user'
-      path: '/api/user'
-      fullPath: '/api/user'
-      preLoaderRoute: typeof ApiUserRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/integrations': {
-      id: '/api/integrations'
-      path: '/api/integrations'
-      fullPath: '/api/integrations'
-      preLoaderRoute: typeof ApiIntegrationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/api-keys': {
-      id: '/api/api-keys'
-      path: '/api/api-keys'
-      fullPath: '/api/api-keys'
-      preLoaderRoute: typeof ApiApiKeysRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/workflows/$workflowId': {
-      id: '/workflows/$workflowId'
-      path: '/workflows/$workflowId'
-      fullPath: '/workflows/$workflowId'
-      preLoaderRoute: typeof WorkflowsWorkflowIdRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/workflows/$workflowId/': {
-      id: '/workflows/$workflowId/'
-      path: '/'
-      fullPath: '/workflows/$workflowId/'
-      preLoaderRoute: typeof WorkflowsWorkflowIdIndexRouteImport
-      parentRoute: typeof WorkflowsWorkflowIdRouteRoute
-    }
-    '/api/workflows/current': {
-      id: '/api/workflows/current'
-      path: '/current'
-      fullPath: '/api/workflows/current'
-      preLoaderRoute: typeof ApiWorkflowsCurrentRouteImport
-      parentRoute: typeof ApiWorkflowsRoute
-    }
-    '/api/workflows/create': {
-      id: '/api/workflows/create'
-      path: '/create'
-      fullPath: '/api/workflows/create'
-      preLoaderRoute: typeof ApiWorkflowsCreateRouteImport
-      parentRoute: typeof ApiWorkflowsRoute
-    }
-    '/api/workflows/$workflowId': {
-      id: '/api/workflows/$workflowId'
-      path: '/$workflowId'
-      fullPath: '/api/workflows/$workflowId'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdRouteImport
-      parentRoute: typeof ApiWorkflowsRoute
-    }
-    '/api/integrations/$integrationId': {
-      id: '/api/integrations/$integrationId'
-      path: '/$integrationId'
-      fullPath: '/api/integrations/$integrationId'
-      preLoaderRoute: typeof ApiIntegrationsIntegrationIdRouteImport
-      parentRoute: typeof ApiIntegrationsRoute
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/api-keys/$keyId': {
-      id: '/api/api-keys/$keyId'
-      path: '/$keyId'
-      fullPath: '/api/api-keys/$keyId'
-      preLoaderRoute: typeof ApiApiKeysKeyIdRouteImport
-      parentRoute: typeof ApiApiKeysRoute
-    }
-    '/api/ai/generate': {
-      id: '/api/ai/generate'
-      path: '/api/ai/generate'
-      fullPath: '/api/ai/generate'
-      preLoaderRoute: typeof ApiAiGenerateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/workflows/$workflowId/webhook': {
-      id: '/api/workflows/$workflowId/webhook'
-      path: '/webhook'
-      fullPath: '/api/workflows/$workflowId/webhook'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdWebhookRouteImport
-      parentRoute: typeof ApiWorkflowsWorkflowIdRoute
-    }
-    '/api/workflows/$workflowId/executions': {
-      id: '/api/workflows/$workflowId/executions'
-      path: '/executions'
-      fullPath: '/api/workflows/$workflowId/executions'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdExecutionsRouteImport
-      parentRoute: typeof ApiWorkflowsWorkflowIdRoute
-    }
-    '/api/workflows/$workflowId/duplicate': {
-      id: '/api/workflows/$workflowId/duplicate'
-      path: '/duplicate'
-      fullPath: '/api/workflows/$workflowId/duplicate'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdDuplicateRouteImport
-      parentRoute: typeof ApiWorkflowsWorkflowIdRoute
-    }
-    '/api/workflows/$workflowId/download': {
-      id: '/api/workflows/$workflowId/download'
-      path: '/download'
-      fullPath: '/api/workflows/$workflowId/download'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdDownloadRouteImport
-      parentRoute: typeof ApiWorkflowsWorkflowIdRoute
-    }
-    '/api/workflows/$workflowId/code': {
-      id: '/api/workflows/$workflowId/code'
-      path: '/code'
-      fullPath: '/api/workflows/$workflowId/code'
-      preLoaderRoute: typeof ApiWorkflowsWorkflowIdCodeRouteImport
-      parentRoute: typeof ApiWorkflowsWorkflowIdRoute
-    }
-    '/api/workflow/$workflowId/execute': {
-      id: '/api/workflow/$workflowId/execute'
-      path: '/api/workflow/$workflowId/execute'
-      fullPath: '/api/workflow/$workflowId/execute'
-      preLoaderRoute: typeof ApiWorkflowWorkflowIdExecuteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/og/workflow/$workflowId': {
-      id: '/api/og/workflow/$workflowId'
-      path: '/api/og/workflow/$workflowId'
-      fullPath: '/api/og/workflow/$workflowId'
-      preLoaderRoute: typeof ApiOgWorkflowWorkflowIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/integrations/$integrationId/testIntegration': {
-      id: '/api/integrations/$integrationId/testIntegration'
-      path: '/testIntegration'
-      fullPath: '/api/integrations/$integrationId/testIntegration'
-      preLoaderRoute: typeof ApiIntegrationsIntegrationIdTestIntegrationRouteImport
-      parentRoute: typeof ApiIntegrationsIntegrationIdRoute
-    }
-    '/api/workflows/executions/$executionId/status': {
-      id: '/api/workflows/executions/$executionId/status'
-      path: '/executions/$executionId/status'
-      fullPath: '/api/workflows/executions/$executionId/status'
-      preLoaderRoute: typeof ApiWorkflowsExecutionsExecutionIdStatusRouteImport
-      parentRoute: typeof ApiWorkflowsRoute
-    }
-    '/api/workflows/executions/$executionId/logs': {
-      id: '/api/workflows/executions/$executionId/logs'
-      path: '/executions/$executionId/logs'
-      fullPath: '/api/workflows/executions/$executionId/logs'
-      preLoaderRoute: typeof ApiWorkflowsExecutionsExecutionIdLogsRouteImport
-      parentRoute: typeof ApiWorkflowsRoute
-    }
+    "/workflows": {
+      id: "/workflows";
+      path: "/workflows";
+      fullPath: "/workflows";
+      preLoaderRoute: typeof WorkflowsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/workflows/$workflowId": {
+      id: "/workflows/$workflowId";
+      path: "/$workflowId";
+      fullPath: "/workflows/$workflowId";
+      preLoaderRoute: typeof WorkflowsWorkflowIdRouteImport;
+      parentRoute: typeof WorkflowsRoute;
+    };
+    "/api/workflows": {
+      id: "/api/workflows";
+      path: "/api/workflows";
+      fullPath: "/api/workflows";
+      preLoaderRoute: typeof ApiWorkflowsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/user": {
+      id: "/api/user";
+      path: "/api/user";
+      fullPath: "/api/user";
+      preLoaderRoute: typeof ApiUserRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/integrations": {
+      id: "/api/integrations";
+      path: "/api/integrations";
+      fullPath: "/api/integrations";
+      preLoaderRoute: typeof ApiIntegrationsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/inngest": {
+      id: "/api/inngest";
+      path: "/api/inngest";
+      fullPath: "/api/inngest";
+      preLoaderRoute: typeof ApiInngestRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/api-keys": {
+      id: "/api/api-keys";
+      path: "/api/api-keys";
+      fullPath: "/api/api-keys";
+      preLoaderRoute: typeof ApiApiKeysRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/workflows/current": {
+      id: "/api/workflows/current";
+      path: "/current";
+      fullPath: "/api/workflows/current";
+      preLoaderRoute: typeof ApiWorkflowsCurrentRouteImport;
+      parentRoute: typeof ApiWorkflowsRoute;
+    };
+    "/api/workflows/create": {
+      id: "/api/workflows/create";
+      path: "/create";
+      fullPath: "/api/workflows/create";
+      preLoaderRoute: typeof ApiWorkflowsCreateRouteImport;
+      parentRoute: typeof ApiWorkflowsRoute;
+    };
+    "/api/workflows/$workflowId": {
+      id: "/api/workflows/$workflowId";
+      path: "/$workflowId";
+      fullPath: "/api/workflows/$workflowId";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdRouteImport;
+      parentRoute: typeof ApiWorkflowsRoute;
+    };
+    "/api/integrations/$integrationId": {
+      id: "/api/integrations/$integrationId";
+      path: "/$integrationId";
+      fullPath: "/api/integrations/$integrationId";
+      preLoaderRoute: typeof ApiIntegrationsIntegrationIdRouteImport;
+      parentRoute: typeof ApiIntegrationsRoute;
+    };
+    "/api/auth/$": {
+      id: "/api/auth/$";
+      path: "/api/auth/$";
+      fullPath: "/api/auth/$";
+      preLoaderRoute: typeof ApiAuthSplatRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/api-keys/$keyId": {
+      id: "/api/api-keys/$keyId";
+      path: "/$keyId";
+      fullPath: "/api/api-keys/$keyId";
+      preLoaderRoute: typeof ApiApiKeysKeyIdRouteImport;
+      parentRoute: typeof ApiApiKeysRoute;
+    };
+    "/api/ai/generate": {
+      id: "/api/ai/generate";
+      path: "/api/ai/generate";
+      fullPath: "/api/ai/generate";
+      preLoaderRoute: typeof ApiAiGenerateRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/workflows/$workflowId/webhook": {
+      id: "/api/workflows/$workflowId/webhook";
+      path: "/webhook";
+      fullPath: "/api/workflows/$workflowId/webhook";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdWebhookRouteImport;
+      parentRoute: typeof ApiWorkflowsWorkflowIdRoute;
+    };
+    "/api/workflows/$workflowId/executions": {
+      id: "/api/workflows/$workflowId/executions";
+      path: "/executions";
+      fullPath: "/api/workflows/$workflowId/executions";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdExecutionsRouteImport;
+      parentRoute: typeof ApiWorkflowsWorkflowIdRoute;
+    };
+    "/api/workflows/$workflowId/duplicate": {
+      id: "/api/workflows/$workflowId/duplicate";
+      path: "/duplicate";
+      fullPath: "/api/workflows/$workflowId/duplicate";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdDuplicateRouteImport;
+      parentRoute: typeof ApiWorkflowsWorkflowIdRoute;
+    };
+    "/api/workflows/$workflowId/download": {
+      id: "/api/workflows/$workflowId/download";
+      path: "/download";
+      fullPath: "/api/workflows/$workflowId/download";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdDownloadRouteImport;
+      parentRoute: typeof ApiWorkflowsWorkflowIdRoute;
+    };
+    "/api/workflows/$workflowId/code": {
+      id: "/api/workflows/$workflowId/code";
+      path: "/code";
+      fullPath: "/api/workflows/$workflowId/code";
+      preLoaderRoute: typeof ApiWorkflowsWorkflowIdCodeRouteImport;
+      parentRoute: typeof ApiWorkflowsWorkflowIdRoute;
+    };
+    "/api/workflow/$workflowId/execute": {
+      id: "/api/workflow/$workflowId/execute";
+      path: "/api/workflow/$workflowId/execute";
+      fullPath: "/api/workflow/$workflowId/execute";
+      preLoaderRoute: typeof ApiWorkflowWorkflowIdExecuteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/og/workflow/$workflowId": {
+      id: "/api/og/workflow/$workflowId";
+      path: "/api/og/workflow/$workflowId";
+      fullPath: "/api/og/workflow/$workflowId";
+      preLoaderRoute: typeof ApiOgWorkflowWorkflowIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/api/integrations/$integrationId/testIntegration": {
+      id: "/api/integrations/$integrationId/testIntegration";
+      path: "/testIntegration";
+      fullPath: "/api/integrations/$integrationId/testIntegration";
+      preLoaderRoute: typeof ApiIntegrationsIntegrationIdTestIntegrationRouteImport;
+      parentRoute: typeof ApiIntegrationsIntegrationIdRoute;
+    };
+    "/api/workflows/executions/$executionId/status": {
+      id: "/api/workflows/executions/$executionId/status";
+      path: "/executions/$executionId/status";
+      fullPath: "/api/workflows/executions/$executionId/status";
+      preLoaderRoute: typeof ApiWorkflowsExecutionsExecutionIdStatusRouteImport;
+      parentRoute: typeof ApiWorkflowsRoute;
+    };
+    "/api/workflows/executions/$executionId/logs": {
+      id: "/api/workflows/executions/$executionId/logs";
+      path: "/executions/$executionId/logs";
+      fullPath: "/api/workflows/executions/$executionId/logs";
+      preLoaderRoute: typeof ApiWorkflowsExecutionsExecutionIdLogsRouteImport;
+      parentRoute: typeof ApiWorkflowsRoute;
+    };
   }
 }
 
-interface WorkflowsWorkflowIdRouteRouteChildren {
-  WorkflowsWorkflowIdIndexRoute: typeof WorkflowsWorkflowIdIndexRoute
+interface WorkflowsRouteChildren {
+  WorkflowsWorkflowIdRoute: typeof WorkflowsWorkflowIdRoute;
 }
 
-const WorkflowsWorkflowIdRouteRouteChildren: WorkflowsWorkflowIdRouteRouteChildren =
-  {
-    WorkflowsWorkflowIdIndexRoute: WorkflowsWorkflowIdIndexRoute,
-  }
+const WorkflowsRouteChildren: WorkflowsRouteChildren = {
+  WorkflowsWorkflowIdRoute,
+};
 
-const WorkflowsWorkflowIdRouteRouteWithChildren =
-  WorkflowsWorkflowIdRouteRoute._addFileChildren(
-    WorkflowsWorkflowIdRouteRouteChildren,
-  )
+const WorkflowsRouteWithChildren = WorkflowsRoute._addFileChildren(
+  WorkflowsRouteChildren
+);
 
 interface ApiApiKeysRouteChildren {
-  ApiApiKeysKeyIdRoute: typeof ApiApiKeysKeyIdRoute
+  ApiApiKeysKeyIdRoute: typeof ApiApiKeysKeyIdRoute;
 }
 
 const ApiApiKeysRouteChildren: ApiApiKeysRouteChildren = {
-  ApiApiKeysKeyIdRoute: ApiApiKeysKeyIdRoute,
-}
+  ApiApiKeysKeyIdRoute,
+};
 
 const ApiApiKeysRouteWithChildren = ApiApiKeysRoute._addFileChildren(
-  ApiApiKeysRouteChildren,
-)
+  ApiApiKeysRouteChildren
+);
 
 interface ApiIntegrationsIntegrationIdRouteChildren {
-  ApiIntegrationsIntegrationIdTestIntegrationRoute: typeof ApiIntegrationsIntegrationIdTestIntegrationRoute
+  ApiIntegrationsIntegrationIdTestIntegrationRoute: typeof ApiIntegrationsIntegrationIdTestIntegrationRoute;
 }
 
 const ApiIntegrationsIntegrationIdRouteChildren: ApiIntegrationsIntegrationIdRouteChildren =
   {
-    ApiIntegrationsIntegrationIdTestIntegrationRoute:
-      ApiIntegrationsIntegrationIdTestIntegrationRoute,
-  }
+    ApiIntegrationsIntegrationIdTestIntegrationRoute,
+  };
 
 const ApiIntegrationsIntegrationIdRouteWithChildren =
   ApiIntegrationsIntegrationIdRoute._addFileChildren(
-    ApiIntegrationsIntegrationIdRouteChildren,
-  )
+    ApiIntegrationsIntegrationIdRouteChildren
+  );
 
 interface ApiIntegrationsRouteChildren {
-  ApiIntegrationsIntegrationIdRoute: typeof ApiIntegrationsIntegrationIdRouteWithChildren
+  ApiIntegrationsIntegrationIdRoute: typeof ApiIntegrationsIntegrationIdRouteWithChildren;
 }
 
 const ApiIntegrationsRouteChildren: ApiIntegrationsRouteChildren = {
   ApiIntegrationsIntegrationIdRoute:
     ApiIntegrationsIntegrationIdRouteWithChildren,
-}
+};
 
 const ApiIntegrationsRouteWithChildren = ApiIntegrationsRoute._addFileChildren(
-  ApiIntegrationsRouteChildren,
-)
+  ApiIntegrationsRouteChildren
+);
 
 interface ApiWorkflowsWorkflowIdRouteChildren {
-  ApiWorkflowsWorkflowIdCodeRoute: typeof ApiWorkflowsWorkflowIdCodeRoute
-  ApiWorkflowsWorkflowIdDownloadRoute: typeof ApiWorkflowsWorkflowIdDownloadRoute
-  ApiWorkflowsWorkflowIdDuplicateRoute: typeof ApiWorkflowsWorkflowIdDuplicateRoute
-  ApiWorkflowsWorkflowIdExecutionsRoute: typeof ApiWorkflowsWorkflowIdExecutionsRoute
-  ApiWorkflowsWorkflowIdWebhookRoute: typeof ApiWorkflowsWorkflowIdWebhookRoute
+  ApiWorkflowsWorkflowIdCodeRoute: typeof ApiWorkflowsWorkflowIdCodeRoute;
+  ApiWorkflowsWorkflowIdDownloadRoute: typeof ApiWorkflowsWorkflowIdDownloadRoute;
+  ApiWorkflowsWorkflowIdDuplicateRoute: typeof ApiWorkflowsWorkflowIdDuplicateRoute;
+  ApiWorkflowsWorkflowIdExecutionsRoute: typeof ApiWorkflowsWorkflowIdExecutionsRoute;
+  ApiWorkflowsWorkflowIdWebhookRoute: typeof ApiWorkflowsWorkflowIdWebhookRoute;
 }
 
 const ApiWorkflowsWorkflowIdRouteChildren: ApiWorkflowsWorkflowIdRouteChildren =
   {
-    ApiWorkflowsWorkflowIdCodeRoute: ApiWorkflowsWorkflowIdCodeRoute,
-    ApiWorkflowsWorkflowIdDownloadRoute: ApiWorkflowsWorkflowIdDownloadRoute,
-    ApiWorkflowsWorkflowIdDuplicateRoute: ApiWorkflowsWorkflowIdDuplicateRoute,
-    ApiWorkflowsWorkflowIdExecutionsRoute:
-      ApiWorkflowsWorkflowIdExecutionsRoute,
-    ApiWorkflowsWorkflowIdWebhookRoute: ApiWorkflowsWorkflowIdWebhookRoute,
-  }
+    ApiWorkflowsWorkflowIdCodeRoute,
+    ApiWorkflowsWorkflowIdDownloadRoute,
+    ApiWorkflowsWorkflowIdDuplicateRoute,
+    ApiWorkflowsWorkflowIdExecutionsRoute,
+    ApiWorkflowsWorkflowIdWebhookRoute,
+  };
 
 const ApiWorkflowsWorkflowIdRouteWithChildren =
   ApiWorkflowsWorkflowIdRoute._addFileChildren(
-    ApiWorkflowsWorkflowIdRouteChildren,
-  )
+    ApiWorkflowsWorkflowIdRouteChildren
+  );
 
 interface ApiWorkflowsRouteChildren {
-  ApiWorkflowsWorkflowIdRoute: typeof ApiWorkflowsWorkflowIdRouteWithChildren
-  ApiWorkflowsCreateRoute: typeof ApiWorkflowsCreateRoute
-  ApiWorkflowsCurrentRoute: typeof ApiWorkflowsCurrentRoute
-  ApiWorkflowsExecutionsExecutionIdLogsRoute: typeof ApiWorkflowsExecutionsExecutionIdLogsRoute
-  ApiWorkflowsExecutionsExecutionIdStatusRoute: typeof ApiWorkflowsExecutionsExecutionIdStatusRoute
+  ApiWorkflowsWorkflowIdRoute: typeof ApiWorkflowsWorkflowIdRouteWithChildren;
+  ApiWorkflowsCreateRoute: typeof ApiWorkflowsCreateRoute;
+  ApiWorkflowsCurrentRoute: typeof ApiWorkflowsCurrentRoute;
+  ApiWorkflowsExecutionsExecutionIdLogsRoute: typeof ApiWorkflowsExecutionsExecutionIdLogsRoute;
+  ApiWorkflowsExecutionsExecutionIdStatusRoute: typeof ApiWorkflowsExecutionsExecutionIdStatusRoute;
 }
 
 const ApiWorkflowsRouteChildren: ApiWorkflowsRouteChildren = {
   ApiWorkflowsWorkflowIdRoute: ApiWorkflowsWorkflowIdRouteWithChildren,
-  ApiWorkflowsCreateRoute: ApiWorkflowsCreateRoute,
-  ApiWorkflowsCurrentRoute: ApiWorkflowsCurrentRoute,
-  ApiWorkflowsExecutionsExecutionIdLogsRoute:
-    ApiWorkflowsExecutionsExecutionIdLogsRoute,
-  ApiWorkflowsExecutionsExecutionIdStatusRoute:
-    ApiWorkflowsExecutionsExecutionIdStatusRoute,
-}
+  ApiWorkflowsCreateRoute,
+  ApiWorkflowsCurrentRoute,
+  ApiWorkflowsExecutionsExecutionIdLogsRoute,
+  ApiWorkflowsExecutionsExecutionIdStatusRoute,
+};
 
 const ApiWorkflowsRouteWithChildren = ApiWorkflowsRoute._addFileChildren(
-  ApiWorkflowsRouteChildren,
-)
+  ApiWorkflowsRouteChildren
+);
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  WorkflowsWorkflowIdRouteRoute: WorkflowsWorkflowIdRouteRouteWithChildren,
+  IndexRoute,
+  WorkflowsRoute: WorkflowsRouteWithChildren,
   ApiApiKeysRoute: ApiApiKeysRouteWithChildren,
+  ApiInngestRoute,
   ApiIntegrationsRoute: ApiIntegrationsRouteWithChildren,
-  ApiUserRoute: ApiUserRoute,
+  ApiUserRoute,
   ApiWorkflowsRoute: ApiWorkflowsRouteWithChildren,
-  WorkflowsIndexRoute: WorkflowsIndexRoute,
-  ApiAiGenerateRoute: ApiAiGenerateRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ApiOgWorkflowWorkflowIdRoute: ApiOgWorkflowWorkflowIdRoute,
-  ApiWorkflowWorkflowIdExecuteRoute: ApiWorkflowWorkflowIdExecuteRoute,
-}
+  ApiAiGenerateRoute,
+  ApiAuthSplatRoute,
+  ApiOgWorkflowWorkflowIdRoute,
+  ApiWorkflowWorkflowIdExecuteRoute,
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.ts'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.ts";
+
+declare module "@tanstack/react-start" {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }

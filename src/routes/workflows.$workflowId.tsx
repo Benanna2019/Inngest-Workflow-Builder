@@ -38,6 +38,13 @@ import {
 } from "@/lib/workflow-store";
 import { findActionById } from "@/plugins";
 
+export const Route = createFileRoute("/workflows/$workflowId")({
+  component: WorkflowEditor,
+  validateSearch: (search: Record<string, unknown>) => ({
+    generating: search.generating as string | undefined,
+  }),
+});
+
 // why was this made a promise?????
 
 // type WorkflowPageProps = {
@@ -103,14 +110,9 @@ function checkNodeIntegration(
   return null;
 }
 
-export const Route = createFileRoute("/workflows/$workflowId/")({
-  component: WorkflowEditor,
-});
-
 function WorkflowEditor() {
-  const { params } = Route.useParams() as { params: { workflowId: string } };
-  const { workflowId } = params;
-  const searchParams = Route.useSearch();
+  const { workflowId } = Route.useParams();
+  const searchParams = Route.useSearch() as { generating?: string };
   const isMobile = useIsMobile();
   const [isGenerating, setIsGenerating] = useAtom(isGeneratingAtom);
   const [_isSaving, setIsSaving] = useAtom(isSavingAtom);
@@ -393,7 +395,7 @@ function WorkflowEditor() {
 
   useEffect(() => {
     const loadWorkflowData = async () => {
-      const isGeneratingParam = searchParams?.get("generating") === "true";
+      const isGeneratingParam = searchParams?.generating === "true";
       const storedPrompt = sessionStorage.getItem("ai-prompt");
       const storedWorkflowId = sessionStorage.getItem("generating-workflow-id");
 

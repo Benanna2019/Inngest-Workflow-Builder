@@ -28,14 +28,18 @@ import ts from "typescript";
 
 const PLUGINS_DIR = join(process.cwd(), "src/plugins");
 const OUTPUT_FILE = join(PLUGINS_DIR, "index.ts");
-const TYPES_FILE = join(process.cwd(), "lib", "types", "integration.ts");
-const STEP_REGISTRY_FILE = join(process.cwd(), "lib", "step-registry.ts");
+const TYPES_FILE = join(process.cwd(), "src/lib", "types", "integration.ts");
+const STEP_REGISTRY_FILE = join(process.cwd(), "src/lib", "step-registry.ts");
 const OUTPUT_CONFIGS_FILE = join(
   process.cwd(),
-  "lib",
+  "src/lib",
   "output-display-configs.ts"
 );
-const CODEGEN_REGISTRY_FILE = join(process.cwd(), "lib", "codegen-registry.ts");
+const CODEGEN_REGISTRY_FILE = join(
+  process.cwd(),
+  "src/lib",
+  "codegen-registry.ts"
+);
 const README_FILE = join(process.cwd(), "README.md");
 const PLUGINS_MARKER_REGEX =
   /<!-- PLUGINS:START[^>]*-->[\s\S]*?<!-- PLUGINS:END -->/;
@@ -485,7 +489,6 @@ function getErrorMessage(error: unknown): string {
 ${inputTypes.join("\n\n")}
 
 export async function ${stepFunctionName}(input: ${inputType}): ${coreFunction.returnType} {
-  "use step";
   const credentials = await fetchCredentials("${integrationType || "unknown"}");
 ${innerBody}
 }`;
@@ -689,8 +692,6 @@ async function generateStepRegistry(): Promise<void> {
  *
  * Generated entries: ${stepEntries.length}
  */
-
-import "server-only";
 
 // biome-ignore lint/suspicious/noExplicitAny: Dynamic step module types - step functions take any input
 export type StepFunction = (input: any) => Promise<any>;

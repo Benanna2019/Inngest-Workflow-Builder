@@ -14,7 +14,6 @@ async function getGitHubStars(): Promise<number | null> {
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           }),
         },
-        next: { revalidate: 3600 }, // Cache for 1 hour
       }
     );
 

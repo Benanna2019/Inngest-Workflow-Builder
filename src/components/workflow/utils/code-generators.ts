@@ -16,15 +16,11 @@ const SYSTEM_ACTION_TEMPLATES: Record<string, string> = {
 };
 
 const FALLBACK_ACTION_CODE = `async function actionStep(input: Record<string, unknown>) {
-  "use step";
-
   console.log('Executing action');
   return { success: true };
 }`;
 
 const FALLBACK_UNKNOWN_CODE = `async function unknownStep(input: Record<string, unknown>) {
-  "use step";
-
   return input;
 }`;
 

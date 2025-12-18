@@ -8,8 +8,6 @@
 export default `export async function databaseQueryStep(input: {
   query: string;
 }) {
-  "use step";
-  
   const databaseUrl = process.env.DATABASE_URL;
   if (!databaseUrl) {
     return { success: false, error: "DATABASE_URL environment variable is not set" };

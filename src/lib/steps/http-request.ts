@@ -1,8 +1,6 @@
 /**
  * Executable step function for HTTP Request action
  */
-import "server-only";
-
 import { getErrorMessage } from "../utils";
 import { type StepInput, withStepLogging } from "./step-handler";
 
@@ -94,11 +92,9 @@ async function httpRequest(
  * HTTP Request Step
  * Makes an HTTP request to an endpoint
  */
-// biome-ignore lint/suspicious/useAwait: workflow "use step" requires async
 export async function httpRequestStep(
   input: HttpRequestInput
 ): Promise<HttpRequestResult> {
-  "use step";
   return withStepLogging(input, () => httpRequest(input));
 }
 httpRequestStep.maxRetries = 0;

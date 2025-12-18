@@ -57,10 +57,10 @@ const myServicePlugin: IntegrationPlugin = {
     {
       id: "apiKey",
       label: "API Key",
-      type: "password",        // "password" | "text" | "url"
+      type: "password", // "password" | "text" | "url"
       placeholder: "sk_...",
-      configKey: "apiKey",     // Key stored in database
-      envVar: "MY_SERVICE_API_KEY",  // Environment variable name
+      configKey: "apiKey", // Key stored in database
+      envVar: "MY_SERVICE_API_KEY", // Environment variable name
       helpText: "Get your API key from ",
       helpLink: {
         text: "myservice.com/api-keys",
@@ -90,7 +90,7 @@ const myServicePlugin: IntegrationPlugin = {
         {
           key: "inputField",
           label: "Input Field",
-          type: "template-input",  // Supports {{NodeName.field}} syntax
+          type: "template-input", // Supports {{NodeName.field}} syntax
           placeholder: "Enter value or use {{NodeName.field}}",
           example: "example value",
           required: true,
@@ -120,8 +120,6 @@ export type MyServiceCredentials = {
 Step functions follow a two-layer pattern:
 
 ```typescript
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import type { MyServiceCredentials } from "../credentials";
@@ -156,7 +154,8 @@ async function stepHandler(
   if (!apiKey) {
     return {
       success: false,
-      error: "MY_SERVICE_API_KEY is not configured. Please add it in Project Integrations.",
+      error:
+        "MY_SERVICE_API_KEY is not configured. Please add it in Project Integrations.",
     };
   }
 
@@ -191,12 +190,11 @@ async function stepHandler(
 
 /**
  * App entry point - fetches credentials and wraps with logging
+ * This function is called by Inngest step.run() during workflow execution
  */
 export async function doSomethingStep(
   input: DoSomethingInput
 ): Promise<DoSomethingResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};
@@ -291,15 +289,15 @@ const plugin: IntegrationPlugin = {
 
 Available types for action `configFields`:
 
-| Type | Description | Supports Variables |
-|------|-------------|-------------------|
-| `template-input` | Single-line input with `{{NodeName.field}}` support | Yes |
-| `template-textarea` | Multi-line textarea with variable support | Yes |
-| `text` | Plain text input | No |
-| `number` | Numeric input | No |
-| `select` | Dropdown with predefined options | No |
-| `schema-builder` | Structured output schema builder | No |
-| `group` | Groups related fields in collapsible section | N/A |
+| Type                | Description                                         | Supports Variables |
+| ------------------- | --------------------------------------------------- | ------------------ |
+| `template-input`    | Single-line input with `{{NodeName.field}}` support | Yes                |
+| `template-textarea` | Multi-line textarea with variable support           | Yes                |
+| `text`              | Plain text input                                    | No                 |
+| `number`            | Numeric input                                       | No                 |
+| `select`            | Dropdown with predefined options                    | No                 |
+| `schema-builder`    | Structured output schema builder                    | No                 |
+| `group`             | Groups related fields in collapsible section        | N/A                |
 
 ### Select Field Example
 
@@ -357,7 +355,7 @@ const response = await fetch("https://api.service.com/endpoint", {
 });
 
 // WRONG - do not add SDK dependencies
-import { ServiceClient } from "service-sdk";  // Never do this
+import { ServiceClient } from "service-sdk"; // Never do this
 const client = new ServiceClient(apiKey);
 ```
 
@@ -375,11 +373,10 @@ This reduces supply chain attack surface by avoiding transitive dependencies.
 
 ### Step Function Requirements
 
-1. Must include `"use step";` directive at the start of the entry point function
-2. Must import `"server-only"` at the top of the file
-3. Must export `_integrationType` constant matching the plugin type
-4. Core input type should match the configFields keys
-5. Full input type extends `StepInput` and includes `integrationId`
+1. Must export `_integrationType` constant matching the plugin type
+2. Core input type should match the configFields keys
+3. Full input type extends `StepInput` and includes `integrationId`
+4. Step functions are called by Inngest's `step.run()` during workflow execution
 
 ### Result Types
 
@@ -409,6 +406,7 @@ Once your plugin is tested and working, create a PR:
 **Title:** `feat: add [Plugin Name] plugin`
 
 **Body:**
+
 ```
 ## Summary
 Adds [Plugin Name] plugin with the following actions:
@@ -456,7 +454,7 @@ Some plugins may work without credentials (using defaults or public APIs):
 ```typescript
 const credentials = input.integrationId
   ? await fetchCredentials(input.integrationId)
-  : {};  // Empty object if no integrationId
+  : {}; // Empty object if no integrationId
 
 // Handle missing credentials gracefully
 const apiKey = credentials.API_KEY || process.env.DEFAULT_API_KEY;

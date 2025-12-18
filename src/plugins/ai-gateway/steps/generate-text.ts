@@ -1,5 +1,3 @@
-import "server-only";
-
 import { createGateway, generateObject, generateText } from "ai";
 import { z } from "zod";
 import { fetchCredentials } from "@/lib/credential-fetcher";
@@ -135,8 +133,6 @@ async function stepHandler(
 export async function generateTextStep(
   input: GenerateTextInput
 ): Promise<GenerateTextResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

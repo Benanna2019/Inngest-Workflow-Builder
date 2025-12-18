@@ -39,7 +39,6 @@ export type GenerateTextCoreInput = {
 export async function generateTextStep(
   input: GenerateTextCoreInput,
 ): Promise<GenerateTextResult> {
-  "use step";
   const credentials = await fetchCredentials("ai-gateway");
   const apiKey = credentials.AI_GATEWAY_API_KEY;
 
@@ -118,7 +117,6 @@ export type GenerateImageCoreInput = {
 export async function generateImageStep(
   input: GenerateImageCoreInput,
 ): Promise<GenerateImageResult> {
-  "use step";
   const credentials = await fetchCredentials("ai-gateway");
   const apiKey = credentials.AI_GATEWAY_API_KEY;
 
@@ -185,7 +183,6 @@ export type PutBlobCoreInput = {
 export async function putBlobStep(
   input: PutBlobCoreInput,
 ): Promise<PutBlobResult> {
-  "use step";
   const credentials = await fetchCredentials("blob");
   const token = credentials.BLOB_READ_WRITE_TOKEN;
 
@@ -292,7 +289,6 @@ export type ListBlobsCoreInput = {
 export async function listBlobsStep(
   input: ListBlobsCoreInput,
 ): Promise<ListBlobsResult> {
-  "use step";
   const credentials = await fetchCredentials("blob");
   const token = credentials.BLOB_READ_WRITE_TOKEN;
 
@@ -377,7 +373,6 @@ export type ClerkGetUserCoreInput = {
 export async function clerkGetUserStep(
   input: ClerkGetUserCoreInput,
 ): Promise<GetUserResult> {
-  "use step";
   const credentials = await fetchCredentials("clerk");
   const secretKey = credentials.CLERK_SECRET_KEY;
 
@@ -452,7 +447,6 @@ export type ClerkCreateUserCoreInput = {
 export async function clerkCreateUserStep(
   input: ClerkCreateUserCoreInput,
 ): Promise<CreateUserResult> {
-  "use step";
   const credentials = await fetchCredentials("clerk");
   const secretKey = credentials.CLERK_SECRET_KEY;
 
@@ -560,7 +554,6 @@ export type ClerkUpdateUserCoreInput = {
 export async function clerkUpdateUserStep(
   input: ClerkUpdateUserCoreInput,
 ): Promise<UpdateUserResult> {
-  "use step";
   const credentials = await fetchCredentials("clerk");
   const secretKey = credentials.CLERK_SECRET_KEY;
 
@@ -662,7 +655,6 @@ export type ClerkDeleteUserCoreInput = {
 export async function clerkDeleteUserStep(
   input: ClerkDeleteUserCoreInput,
 ): Promise<DeleteUserResult> {
-  "use step";
   const credentials = await fetchCredentials("clerk");
   const secretKey = credentials.CLERK_SECRET_KEY;
 
@@ -737,7 +729,6 @@ export type FalGenerateImageCoreInput = {
 export async function falGenerateImageStep(
   input: FalGenerateImageCoreInput,
 ): Promise<GenerateImageResult> {
-  "use step";
   const credentials = await fetchCredentials("fal");
   const apiKey = credentials.FAL_API_KEY;
 
@@ -825,7 +816,6 @@ export type FalGenerateVideoCoreInput = {
 export async function falGenerateVideoStep(
   input: FalGenerateVideoCoreInput,
 ): Promise<GenerateVideoResult> {
-  "use step";
   const credentials = await fetchCredentials("fal");
   const apiKey = credentials.FAL_API_KEY;
 
@@ -915,7 +905,6 @@ export type FalUpscaleImageCoreInput = {
 export async function falUpscaleImageStep(
   input: FalUpscaleImageCoreInput,
 ): Promise<UpscaleImageResult> {
-  "use step";
   const credentials = await fetchCredentials("fal");
   const apiKey = credentials.FAL_API_KEY;
 
@@ -999,7 +988,6 @@ export type FalRemoveBackgroundCoreInput = {
 export async function falRemoveBackgroundStep(
   input: FalRemoveBackgroundCoreInput,
 ): Promise<RemoveBackgroundResult> {
-  "use step";
   const credentials = await fetchCredentials("fal");
   const apiKey = credentials.FAL_API_KEY;
 
@@ -1082,7 +1070,6 @@ export type FalImageToImageCoreInput = {
 export async function falImageToImageStep(
   input: FalImageToImageCoreInput,
 ): Promise<ImageToImageResult> {
-  "use step";
   const credentials = await fetchCredentials("fal");
   const apiKey = credentials.FAL_API_KEY;
 
@@ -1171,7 +1158,6 @@ export type FirecrawlScrapeCoreInput = {
 export async function firecrawlScrapeStep(
   input: FirecrawlScrapeCoreInput,
 ): Promise<ScrapeResult> {
-  "use step";
   const credentials = await fetchCredentials("firecrawl");
   const apiKey = credentials.FIRECRAWL_API_KEY;
 
@@ -1235,7 +1221,6 @@ export type FirecrawlSearchCoreInput = {
 export async function firecrawlSearchStep(
   input: FirecrawlSearchCoreInput,
 ): Promise<SearchResult> {
-  "use step";
   const credentials = await fetchCredentials("firecrawl");
   const apiKey = credentials.FIRECRAWL_API_KEY;
 
@@ -1307,7 +1292,6 @@ export type CreateIssueCoreInput = {
 export async function createIssueStep(
   input: CreateIssueCoreInput,
 ): Promise<CreateIssueResult> {
-  "use step";
   const credentials = await fetchCredentials("github");
   const token = credentials.GITHUB_TOKEN;
 
@@ -1417,7 +1401,6 @@ export type ListIssuesCoreInput = {
 export async function listIssuesStep(
   input: ListIssuesCoreInput,
 ): Promise<ListIssuesResult> {
-  "use step";
   const credentials = await fetchCredentials("github");
   const token = credentials.GITHUB_TOKEN;
 
@@ -1533,7 +1516,6 @@ export type GetIssueCoreInput = {
 export async function getIssueStep(
   input: GetIssueCoreInput,
 ): Promise<GetIssueResult> {
-  "use step";
   const credentials = await fetchCredentials("github");
   const token = credentials.GITHUB_TOKEN;
 
@@ -1633,7 +1615,6 @@ export type UpdateIssueCoreInput = {
 export async function updateIssueStep(
   input: UpdateIssueCoreInput,
 ): Promise<UpdateIssueResult> {
-  "use step";
   const credentials = await fetchCredentials("github");
   const token = credentials.GITHUB_TOKEN;
 
@@ -1745,7 +1726,6 @@ export type CreateTicketCoreInput = {
 export async function createTicketStep(
   input: CreateTicketCoreInput,
 ): Promise<CreateTicketResult> {
-  "use step";
   const credentials = await fetchCredentials("linear");
   const apiKey = credentials.LINEAR_API_KEY;
   const teamId = credentials.LINEAR_TEAM_ID;
@@ -1764,7 +1744,7 @@ export async function createTicketStep(
     if (!targetTeamId) {
       const teamsResult = await linearQuery<TeamsQueryResponse>(
         apiKey,
-        \`query { teams { nodes { id name } } }\`,
+        "query { teams { nodes { id name } } }",
       );
 
       if (teamsResult.errors?.length) {
@@ -1854,7 +1834,6 @@ export type FindIssuesCoreInput = {
 export async function findIssuesStep(
   input: FindIssuesCoreInput,
 ): Promise<FindIssuesResult> {
-  "use step";
   const credentials = await fetchCredentials("linear");
   const apiKey = credentials.LINEAR_API_KEY;
 
@@ -1958,7 +1937,6 @@ export type PerplexitySearchCoreInput = {
 export async function perplexitySearchStep(
   input: PerplexitySearchCoreInput,
 ): Promise<SearchResult> {
-  "use step";
   const credentials = await fetchCredentials("perplexity");
   const apiKey = credentials.PERPLEXITY_API_KEY;
 
@@ -2036,7 +2014,6 @@ export type PerplexityAskCoreInput = {
 export async function perplexityAskStep(
   input: PerplexityAskCoreInput,
 ): Promise<AskResult> {
-  "use step";
   const credentials = await fetchCredentials("perplexity");
   const apiKey = credentials.PERPLEXITY_API_KEY;
 
@@ -2122,7 +2099,6 @@ export type PerplexityResearchCoreInput = {
 export async function perplexityResearchStep(
   input: PerplexityResearchCoreInput,
 ): Promise<ResearchResult> {
-  "use step";
   const credentials = await fetchCredentials("perplexity");
   const apiKey = credentials.PERPLEXITY_API_KEY;
 
@@ -2205,7 +2181,6 @@ export type SendEmailCoreInput = {
 export async function sendEmailStep(
   input: SendEmailCoreInput,
 ): Promise<SendEmailResult> {
-  "use step";
   const credentials = await fetchCredentials("resend");
   const apiKey = credentials.RESEND_API_KEY;
   const fromEmail = credentials.RESEND_FROM_EMAIL;
@@ -2293,7 +2268,6 @@ export type SendSlackMessageCoreInput = {
 export async function sendSlackMessageStep(
   input: SendSlackMessageCoreInput,
 ): Promise<SendSlackMessageResult> {
-  "use step";
   const credentials = await fetchCredentials("slack");
   const apiKey = credentials.SLACK_API_KEY;
 
@@ -2370,7 +2344,6 @@ export type CreateCustomerCoreInput = {
 export async function createCustomerStep(
   input: CreateCustomerCoreInput,
 ): Promise<CreateCustomerResult> {
-  "use step";
   const credentials = await fetchCredentials("stripe");
   const apiKey = credentials.STRIPE_SECRET_KEY;
 
@@ -2468,7 +2441,6 @@ export type GetCustomerCoreInput = {
 export async function getCustomerStep(
   input: GetCustomerCoreInput,
 ): Promise<GetCustomerResult> {
-  "use step";
   const credentials = await fetchCredentials("stripe");
   const apiKey = credentials.STRIPE_SECRET_KEY;
 
@@ -2480,7 +2452,7 @@ export async function getCustomerStep(
     };
   }
 
-  if (!input.customerId && !input.email) {
+  if (!(input.customerId || input.email)) {
     return {
       success: false,
       error: "Either Customer ID or Email is required",
@@ -2603,7 +2575,6 @@ export type CreateInvoiceCoreInput = {
 export async function createInvoiceStep(
   input: CreateInvoiceCoreInput,
 ): Promise<CreateInvoiceResult> {
-  "use step";
   const credentials = await fetchCredentials("stripe");
   const apiKey = credentials.STRIPE_SECRET_KEY;
 
@@ -2782,7 +2753,6 @@ export type SuperagentGuardCoreInput = {
 export async function superagentGuardStep(
   input: SuperagentGuardCoreInput,
 ): Promise<GuardResult> {
-  "use step";
   const credentials = await fetchCredentials("superagent");
   const apiKey = credentials.SUPERAGENT_API_KEY;
 
@@ -2859,7 +2829,6 @@ export type SuperagentRedactCoreInput = {
 export async function superagentRedactStep(
   input: SuperagentRedactCoreInput,
 ): Promise<RedactResult> {
-  "use step";
   const credentials = await fetchCredentials("superagent");
   const apiKey = credentials.SUPERAGENT_API_KEY;
 
@@ -2917,7 +2886,7 @@ export async function superagentRedactStep(
 }
 `,
 
-  "v0/create-chat": `import { createClient, type ChatsCreateResponse } from "v0-sdk";
+  "v0/create-chat": `import { type ChatsCreateResponse, createClient } from "v0-sdk";
 import { fetchCredentials } from "./lib/credential-helper";
 
 function getErrorMessage(error: unknown): string {
@@ -2937,7 +2906,6 @@ export type CreateChatCoreInput = {
 export async function createChatStep(
   input: CreateChatCoreInput,
 ): Promise<CreateChatResult> {
-  "use step";
   const credentials = await fetchCredentials("v0");
   const apiKey = credentials.V0_API_KEY;
 
@@ -2972,7 +2940,7 @@ export async function createChatStep(
 }
 `,
 
-  "v0/send-message": `import { createClient, type ChatsSendMessageResponse } from "v0-sdk";
+  "v0/send-message": `import { type ChatsSendMessageResponse, createClient } from "v0-sdk";
 import { fetchCredentials } from "./lib/credential-helper";
 
 function getErrorMessage(error: unknown): string {
@@ -2992,7 +2960,6 @@ export type SendMessageCoreInput = {
 export async function sendMessageStep(
   input: SendMessageCoreInput,
 ): Promise<SendMessageResult> {
-  "use step";
   const credentials = await fetchCredentials("v0");
   const apiKey = credentials.V0_API_KEY;
 
@@ -3054,7 +3021,6 @@ export type ListSitesCoreInput = Record<string, never>;
 export async function listSitesStep(
   input: ListSitesCoreInput,
 ): Promise<ListSitesResult> {
-  "use step";
   const credentials = await fetchCredentials("webflow");
   const apiKey = credentials.WEBFLOW_API_KEY;
 
@@ -3141,7 +3107,6 @@ export type GetSiteCoreInput = {
 export async function getSiteStep(
   input: GetSiteCoreInput,
 ): Promise<GetSiteResult> {
-  "use step";
   const credentials = await fetchCredentials("webflow");
   const apiKey = credentials.WEBFLOW_API_KEY;
 
@@ -3226,7 +3191,6 @@ export type PublishSiteCoreInput = {
 export async function publishSiteStep(
   input: PublishSiteCoreInput,
 ): Promise<PublishSiteResult> {
-  "use step";
   const credentials = await fetchCredentials("webflow");
   const apiKey = credentials.WEBFLOW_API_KEY;
 

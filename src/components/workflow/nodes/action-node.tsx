@@ -209,10 +209,9 @@ function GeneratedImageThumbnail({ base64 }: { base64: string }) {
         <Image
           alt="Generated image"
           className="object-cover"
-          fill
+          layout="fullWidth"
           sizes="48px"
           src={`data:image/png;base64,${base64}`}
-          unoptimized
         />
       </button>
 
@@ -223,10 +222,9 @@ function GeneratedImageThumbnail({ base64 }: { base64: string }) {
             <Image
               alt="Generated image"
               className="object-contain"
-              fill
+              layout="fullWidth"
               sizes="(max-width: 768px) 100vw, 768px"
               src={`data:image/png;base64,${base64}`}
-              unoptimized
             />
           </div>
         </DialogContent>

@@ -1,5 +1,3 @@
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import type { BlobCredentials } from "../credentials";
@@ -115,8 +113,6 @@ async function stepHandler(
 }
 
 export async function putBlobStep(input: PutBlobInput): Promise<PutBlobResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

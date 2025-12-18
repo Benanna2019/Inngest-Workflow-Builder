@@ -1,5 +1,3 @@
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import { getErrorMessage } from "@/lib/utils";
@@ -141,8 +139,6 @@ function getSearchDomains(focus?: string): string[] | undefined {
 export async function perplexitySearchStep(
   input: PerplexitySearchInput
 ): Promise<SearchResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

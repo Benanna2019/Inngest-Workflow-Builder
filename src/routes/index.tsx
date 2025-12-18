@@ -1,5 +1,3 @@
-"use client";
-
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useAtomValue, useSetAtom } from "jotai";
 import { nanoid } from "nanoid";
@@ -118,6 +116,7 @@ function Home() {
           nodes: realNodes,
           edges,
         });
+        console.log("newworkflow", newWorkflow);
 
         // Set flags to indicate we're coming from homepage (for sidebar animation)
         sessionStorage.setItem("animate-sidebar", "true");
@@ -125,7 +124,11 @@ function Home() {
 
         // Redirect to the workflow page
         console.log("[Homepage] Navigating to workflow page");
-        router.navigate({ to: `/workflows/${newWorkflow.id}` });
+        router.navigate({
+          to: "/workflows/$workflowId",
+          params: { workflowId: newWorkflow.id },
+          search: { generating: "true" },
+        });
       } catch (error) {
         console.error("Failed to create workflow:", error);
         toast.error("Failed to create workflow");

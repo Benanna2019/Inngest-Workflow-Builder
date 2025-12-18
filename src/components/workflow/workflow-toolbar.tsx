@@ -100,7 +100,7 @@ import {
 } from "@/plugins";
 import { Panel } from "../ai-elements/panel";
 import { DeployButton } from "../deploy-button";
-import { GitHubStarsButton } from "../github-stars-button";
+// import { GitHubStarsButton } from "../github-stars-button";
 import { IntegrationFormDialog } from "../settings/integration-form-dialog";
 import { IntegrationIcon } from "../ui/integration-icon";
 import { WorkflowIcon } from "../ui/workflow-icon";
@@ -1028,7 +1028,11 @@ function useWorkflowActions(state: ReturnType<typeof useWorkflowState>) {
 
       const newWorkflow = await api.workflow.duplicate(currentWorkflowId);
       toast.success("Workflow duplicated successfully");
-      router.navigate(`/workflows/${newWorkflow.id}`);
+      router.navigate({
+        to: "/workflows/$workflowId",
+        params: { workflowId: newWorkflow.id },
+        search: { generating: undefined },
+      });
     } catch (error) {
       console.error("Failed to duplicate workflow:", error);
       toast.error("Failed to duplicate workflow. Please try again.");
@@ -1537,7 +1541,11 @@ function WorkflowMenuComponent({
                     className="flex items-center justify-between"
                     key={workflow.id}
                     onClick={() =>
-                      state.router.navigate({ to: `/workflows/${workflow.id}` })
+                      state.router.navigate({
+                        to: "/workflows/$workflowId",
+                        params: { workflowId: workflow.id },
+                        search: { generating: undefined },
+                      })
                     }
                   >
                     <span className="truncate">{workflow.name}</span>
@@ -2079,7 +2087,7 @@ export const WorkflowToolbar = ({ workflowId }: WorkflowToolbarProps) => {
           <div className="flex items-center gap-2">
             {!workflowId && (
               <>
-                <GitHubStarsButton />
+                {/* <GitHubStarsButton /> */}
                 <DeployButton />
               </>
             )}

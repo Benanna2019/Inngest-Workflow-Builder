@@ -1,4 +1,3 @@
-import "server-only";
 import { Vercel } from "@vercel/sdk";
 
 export type VercelProject = {

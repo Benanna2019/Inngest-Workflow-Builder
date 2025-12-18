@@ -33,6 +33,7 @@ export const Route = createFileRoute("/api/integrations")({
   server: {
     handlers: {
       GET: getAllIntegrations,
+      POST: createNewIntegration,
     },
   },
 });
@@ -90,7 +91,7 @@ async function getAllIntegrations({ request }: { request: Request }) {
  * POST /api/integrations
  * Create a new integration
  */
-export async function POST(request: Request) {
+async function createNewIntegration({ request }: { request: Request }) {
   try {
     const session = await auth.api.getSession({
       headers: request.headers,

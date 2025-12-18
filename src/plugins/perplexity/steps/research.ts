@@ -1,5 +1,3 @@
-import "server-only";
-
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
 import { getErrorMessage } from "@/lib/utils";
@@ -127,8 +125,6 @@ function getDepthInstructions(depth?: string): string {
 export async function perplexityResearchStep(
   input: PerplexityResearchInput
 ): Promise<ResearchResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

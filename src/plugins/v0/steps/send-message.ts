@@ -1,5 +1,3 @@
-import "server-only";
-
 import { type ChatsSendMessageResponse, createClient } from "v0-sdk";
 import { fetchCredentials } from "@/lib/credential-fetcher";
 import { type StepInput, withStepLogging } from "@/lib/steps/step-handler";
@@ -64,8 +62,6 @@ async function stepHandler(
 export async function sendMessageStep(
   input: SendMessageInput
 ): Promise<SendMessageResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

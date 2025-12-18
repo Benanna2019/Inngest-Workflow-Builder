@@ -10,8 +10,6 @@
  * Generated entries: 36
  */
 
-import "server-only";
-
 // biome-ignore lint/suspicious/noExplicitAny: Dynamic step module types - step functions take any input
 export type StepFunction = (input: any) => Promise<any>;
 

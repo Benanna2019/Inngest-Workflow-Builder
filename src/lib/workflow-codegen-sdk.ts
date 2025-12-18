@@ -1,5 +1,3 @@
-import "server-only";
-
 import { findActionById } from "@/plugins";
 // System action codegen templates (not in plugin registry)
 import conditionTemplate from "./codegen-templates/condition";
@@ -214,7 +212,7 @@ function generateAllStepFunctions(
 
 /**
  * Generate workflow SDK code from workflow definition
- * This generates proper "use workflow" and "use step" code
+ * This generates Inngest-compatible step functions
  */
 export function generateWorkflowSDKCode(
   workflowName: string,
@@ -525,8 +523,6 @@ export function generateWorkflowSDKCode(
     }
 
     return `async function ${stepName}(input: Record<string, unknown> & { outputs?: Record<string, { label: string; data: unknown }> }) {
-  "use step";
-  
 ${stepBody}
 }`;
   }
@@ -716,8 +712,6 @@ ${stepBody}
   const functionName = sanitizeFunctionName(workflowName);
 
   const mainFunction = `export async function ${functionName}() {
-  "use workflow";
-  
   // Input from workflow trigger - replace with your trigger data
   const input: Record<string, unknown> = {};
   

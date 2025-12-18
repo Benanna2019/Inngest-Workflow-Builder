@@ -1,17 +1,30 @@
 "use client";
 
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  useLocation,
+  useRouter,
+} from "@tanstack/react-router";
 import { useEffect } from "react";
 import { api } from "@/lib/api-client";
 
-export const Route = createFileRoute("/workflows/")({
+export const Route = createFileRoute("/workflows")({
   component: WorkflowsPage,
 });
 
 function WorkflowsPage() {
   const router = useRouter();
+  const location = useLocation();
+
+  // Only redirect if we're at exactly /workflows (not a child route like /workflows/abc)
+  const isExactMatch = location.pathname === "/workflows";
 
   useEffect(() => {
+    if (!isExactMatch) {
+      return;
+    }
+
     const redirectToWorkflow = async () => {
       try {
         const workflows = await api.workflow.getAll();
@@ -24,7 +37,11 @@ function WorkflowsPage() {
             (a, b) =>
               new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
           )[0];
-          router.navigate({ to: `/workflows/${mostRecent.id}` });
+          router.navigate({
+            to: "/workflows/$workflowId",
+            params: { workflowId: mostRecent.id },
+            search: { generating: undefined },
+          });
         } else {
           // No workflows, redirect to homepage
           router.navigate({ to: "/" });
@@ -36,7 +53,8 @@ function WorkflowsPage() {
     };
 
     redirectToWorkflow();
-  }, [router]);
+  }, [router, isExactMatch]);
 
-  return null;
+  // Render Outlet so child routes (like /workflows/$workflowId) can display
+  return <Outlet />;
 }

@@ -1,10 +1,8 @@
 /**
  * Step Handler - Logging utilities for workflow builder UI
- * These functions are called FROM INSIDE steps (within "use step" context)
+ * These functions wrap step logic with automatic logging
  * Uses direct database calls for security (no HTTP endpoint)
  */
-import "server-only";
-
 import { redactSensitiveData } from "../utils/redact";
 import {
   logStepCompleteDb,
@@ -144,12 +142,10 @@ export type StepInputWithWorkflow = {
 
 /**
  * Wrap step logic with logging
- * Call this from inside your step function (within "use step" context)
  * If _context._workflowComplete is set, also logs workflow completion
  *
  * @example
  * export async function myStep(input: MyInput & StepInput) {
- *   "use step";
  *   return withStepLogging(input, async () => {
  *     // your step logic here
  *     return { success: true, data: ... };

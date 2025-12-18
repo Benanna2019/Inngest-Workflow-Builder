@@ -4,8 +4,6 @@
  * SECURITY PATTERN - External Secret Store:
  * Step fetches credentials using workflow ID reference
  */
-import "server-only";
-
 import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -132,11 +130,9 @@ async function databaseQuery(
  * Database Query Step
  * Executes a SQL query against a PostgreSQL database
  */
-// biome-ignore lint/suspicious/useAwait: workflow "use step" requires async
 export async function databaseQueryStep(
   input: DatabaseQueryInput
 ): Promise<DatabaseQueryResult> {
-  "use step";
   return withStepLogging(input, () => databaseQuery(input));
 }
 databaseQueryStep.maxRetries = 0;

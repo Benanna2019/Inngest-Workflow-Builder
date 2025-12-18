@@ -1,6 +1,7 @@
 /**
- * Workflow-based executor using "use workflow" and "use step" directives
- * This executor captures step executions through the workflow SDK for better observability
+ * Workflow executor utilities
+ * This module provides shared utilities for executing workflow nodes
+ * Used by the Inngest workflow executor for step execution
  */
 
 import {

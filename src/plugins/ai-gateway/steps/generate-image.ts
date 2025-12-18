@@ -1,5 +1,3 @@
-import "server-only";
-
 import type { ImageModelV2 } from "@ai-sdk/provider";
 import { createGateway, experimental_generateImage as generateImage } from "ai";
 import { fetchCredentials } from "@/lib/credential-fetcher";
@@ -76,8 +74,6 @@ async function stepHandler(
 export async function generateImageStep(
   input: GenerateImageInput
 ): Promise<GenerateImageResult> {
-  "use step";
-
   const credentials = input.integrationId
     ? await fetchCredentials(input.integrationId)
     : {};

@@ -1,11 +1,10 @@
 import { createHash } from "node:crypto";
 import { createFileRoute } from "@tanstack/react-router";
 import { eq } from "drizzle-orm";
-import { start } from "workflow/api";
 import { db } from "@/lib/db";
 import { validateWorkflowIntegrations } from "@/lib/db/integrations";
 import { apiKeys, workflowExecutions, workflows } from "@/lib/db/schema";
-import { executeWorkflow } from "@/lib/workflow-executor.workflow";
+import { inngest } from "@/lib/inngest/client";
 import type { WorkflowEdge, WorkflowNode } from "@/lib/workflow-store";
 
 export const Route = createFileRoute("/api/workflows/$workflowId/webhook")({
@@ -87,27 +86,28 @@ async function executeWorkflowBackground(
 ) {
   try {
     console.log("[Webhook] Starting execution:", executionId);
-
-    console.log("[Webhook] Calling executeWorkflow with:", {
+    console.log("[Webhook] Sending to Inngest with:", {
       nodeCount: nodes.length,
       edgeCount: edges.length,
       hasExecutionId: !!executionId,
       workflowId,
     });
 
-    start(executeWorkflow, [
-      {
+    // Send event to Inngest to execute the workflow
+    await inngest.send({
+      name: "workflow/execute",
+      data: {
         nodes,
         edges,
         triggerInput: input,
         executionId,
         workflowId,
       },
-    ]);
+    });
 
-    console.log("[Webhook] Workflow started successfully");
+    console.log("[Webhook] Workflow event sent to Inngest");
   } catch (error) {
-    console.error("[Webhook] Error during execution:", error);
+    console.error("[Webhook] Error sending to Inngest:", error);
     console.error(
       "[Webhook] Error stack:",
       error instanceof Error ? error.stack : "N/A"

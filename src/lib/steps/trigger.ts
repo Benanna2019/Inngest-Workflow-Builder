@@ -2,8 +2,6 @@
  * Trigger step - handles trigger execution with proper logging
  * Also handles workflow completion when called with _workflowComplete
  */
-import "server-only";
-
 import {
   logWorkflowComplete,
   type StepInput,
@@ -43,8 +41,6 @@ function executeTrigger(input: TriggerInput): TriggerResult {
  * Also handles workflow completion when called with _workflowComplete
  */
 export async function triggerStep(input: TriggerInput): Promise<TriggerResult> {
-  "use step";
-
   // If this is a completion-only call, just log workflow completion
   if (input._workflowComplete) {
     await logWorkflowComplete(input._workflowComplete);
